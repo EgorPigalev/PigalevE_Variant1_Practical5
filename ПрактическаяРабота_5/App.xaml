@@ -50,6 +50,7 @@
             <Style.Setters>
                 <Setter Property="Foreground" Value="#7109AA"/>
                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Cursor" Value="Hand"/>
             </Style.Setters>
         </Style>
     </Application.Resources>

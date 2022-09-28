@@ -140,6 +140,11 @@ namespace ПрактическаяРабота_5
             {
                 if(RBZodiac.IsChecked == true)
                 {
+                    if(TBDay.Text == "" || TBMonth.Text == "")
+                    {
+                        MessageBox.Show("Все поля должны быть заполнены!");
+                        return;
+                    }
                     if (GetProverkaDay(Convert.ToInt32(TBDay.Text), TBMonth.Text) == true)
                     {
                         return;
@@ -263,7 +268,7 @@ namespace ПрактическаяРабота_5
                         }
                         if (Year == 1911)
                         {
-                            Horoscope = "Свенья";
+                            Horoscope = "Свинья";
                             break;
                         }
                         Year -=12;
