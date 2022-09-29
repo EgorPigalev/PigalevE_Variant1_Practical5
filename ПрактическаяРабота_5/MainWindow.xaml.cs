@@ -121,19 +121,6 @@ namespace ПрактическаяРабота_5
             return false;
         }
 
-        bool GetProverkaYear(string year)
-        {
-            if(Convert.ToInt32(year) >= 1900)
-            {
-                return false;
-            }
-            else
-            {
-                MessageBox.Show("Необходимо ввести год старше 1900!");
-                return true;
-            }
-        }
-
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -203,75 +190,56 @@ namespace ПрактическаяРабота_5
                 }
                 else if(RBEasternHoroscope.IsChecked == true)
                 {
-                    if (GetProverkaYear(TBYear.Text) == true)
-                    {
-                        return;
-                    }
                     string Horoscope = "";
                     int Year = Convert.ToInt32(TBYear.Text);
-                    while (true)
+                    Year = Year % 12;
+                    if (Year == 0)
                     {
-                        if(Year == 1900)
-                        {
-                            Horoscope = "Крыса";
-                            break;
-                        }
-                        if (Year == 1901)
-                        {
-                            Horoscope = "Бык";
-                            break;
-                        }
-                        if (Year == 1902)
-                        {
-                            Horoscope = "Тигр";
-                            break;
-                        }
-                        if (Year == 1903)
-                        {
-                            Horoscope = "Кролик";
-                            break;
-                        }
-                        if (Year == 1904)
-                        {
-                            Horoscope = "Дракон";
-                            break;
-                        }
-                        if (Year == 1905)
-                        {
-                            Horoscope = "Змея";
-                            break;
-                        }
-                        if (Year == 1906)
-                        {
-                            Horoscope = "Лошадь";
-                            break;
-                        }
-                        if (Year == 1907)
-                        {
-                            Horoscope = "Овца";
-                            break;
-                        }
-                        if (Year == 1908)
-                        {
-                            Horoscope = "Обезьяна";
-                            break;
-                        }
-                        if (Year == 1909)
-                        {
-                            Horoscope = "Петух";
-                            break;
-                        }
-                        if (Year == 1910)
-                        {
-                            Horoscope = "Собака";
-                            break;
-                        }
-                        if (Year == 1911)
-                        {
-                            Horoscope = "Свинья";
-                            break;
-                        }
-                        Year -=12;
+                        Horoscope = "Обезьяна";
+                    }
+                    else if (Year == 1)
+                    {
+                        Horoscope = "Петух";
+                    }
+                    else if (Year == 2)
+                    {
+                        Horoscope = "Собака";
+                    }
+                    else if (Year == 3)
+                    {
+                        Horoscope = "Кабан";
+                    }
+                    else if (Year == 4)
+                    {
+                        Horoscope = "Крыса";
+                    }
+                    else if (Year == 5)
+                    {
+                        Horoscope = "Бык";
+                    }
+                    else if (Year == 6)
+                    {
+                        Horoscope = "Тигр";
+                    }
+                    else if (Year == 7)
+                    {
+                        Horoscope = "Кролик";
+                    }
+                    else if (Year == 8)
+                    {
+                        Horoscope = "Дракон";
+                    }
+                    else if (Year == 9)
+                    {
+                        Horoscope = "Змея";
+                    }
+                    else if (Year == 10)
+                    {
+                        Horoscope = "Лошадь";
+                    }
+                    else if (Year == 11)
+                    {
+                        Horoscope = "Овца";
                     }
                     TBHeaderResult.Visibility = Visibility.Visible;
                     TBlResult.Text = "Знак по восточному гороскопу => " + Horoscope;
