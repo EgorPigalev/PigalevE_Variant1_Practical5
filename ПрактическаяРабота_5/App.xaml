@@ -28,6 +28,12 @@
         <Style TargetType="StackPanel">
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
+        <ControlTemplate x:Key="CTButonMenu" TargetType="Button">
+            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="2"
+                    Background="#FFC377F1" Width="400">
+                <ContentControl Content="{TemplateBinding Content}" VerticalAlignment="Center" Margin="5"/>
+            </Border>
+        </ControlTemplate>
         <ControlTemplate x:Key="CTButon" TargetType="Button">
             <Border CornerRadius="20" BorderBrush="Black" BorderThickness="2"
                     Background="#FFC377F1" Width="250">
@@ -50,9 +56,7 @@
             <Style.Setters>
                 <Setter Property="Foreground" Value="#7109AA"/>
                 <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="Cursor" Value="Hand"/>
             </Style.Setters>
         </Style>
     </Application.Resources>
-    
 </Application>

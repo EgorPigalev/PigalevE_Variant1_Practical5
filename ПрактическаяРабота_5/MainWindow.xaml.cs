@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -41,154 +42,165 @@ namespace ПрактическаяРабота_5
             SPButton.Visibility = Visibility.Visible;
         }
 
-        bool GetProverkaDay(int day, string month)
+        public static bool GetProverkaDay(int day, string month, ref string error) // Проверка корректности дня и месяца
         {
-            if(month == "Январь" && day > 31)
+            if (month != "Январь" && month != "Февраль" && month != "Март" && month != "Апрель" && month != "Май" && month != "Июнь" && month != "Июль" && month != "Август" && month != "Сентябрь" && month != "Октябрь" && month != "Ноябрь" && month != "Декабрь")
             {
-                MessageBox.Show("В январе нет " + day +" числа!");
+                return true;
+            }
+            if (month == "Январь" && day > 31)
+            {
+                error = "В январе нет " + day + " числа!";
                 return true;
             }
             if (month == "Февраль" && day > 29)
             {
-                MessageBox.Show("В феврале нет " + day + " числа!");
+                error = "В феврале нет " + day + " числа!";
                 return true;
             }
             if (month == "Март" && day > 31)
             {
-                MessageBox.Show("В марте нет " + day + " числа!");
+                error = "В марте нет " + day + " числа!";
                 return true;
             }
             if (month == "Апрель" && day > 30)
             {
-                MessageBox.Show("В апреле нет " + day + " числа!");
+                error = "В апреле нет " + day + " числа!";
                 return true;
             }
             if (month == "Май" && day > 31)
             {
-                MessageBox.Show("В мае нет " + day + " числа!");
+                error = "В мае нет " + day + " числа!";
                 return true;
             }
             if (month == "Июнь" && day > 31)
             {
-                MessageBox.Show("В июне нет " + day + " числа!");
+                error = "В июне нет " + day + " числа!";
                 return true;
             }
             if (month == "Июль" && day > 31)
             {
-                MessageBox.Show("В июле нет " + day + " числа!");
+                error = "В июле нет " + day + " числа!";
                 return true;
             }
             if (month == "Август" && day > 31)
             {
-                MessageBox.Show("В августе нет " + day + " числа!");
+                error = "В августе нет " + day + " числа!";
                 return true;
             }
             if (month == "Сентябрь" && day > 31)
             {
-                MessageBox.Show("В сентябре нет " + day + " числа!");
+                error = "В сентябре нет " + day + " числа!";
                 return true;
             }
             if (month == "Август" && day > 31)
             {
-                MessageBox.Show("В августе нет " + day + " числа!");
+                error = "В августе нет " + day + " числа!";
                 return true;
             }
             if (month == "Сентябрь" && day > 30)
             {
-                MessageBox.Show("В сентябре нет " + day + " числа!");
+                error = "В сентябре нет " + day + " числа!";
                 return true;
             }
             if (month == "Октябрь" && day > 31)
             {
-                MessageBox.Show("В октябре нет " + day + " числа!");
+                error = "В октябре нет " + day + " числа!";
                 return true;
             }
             if (month == "Ноябрь" && day > 30)
             {
-                MessageBox.Show("В ноябре нет " + day + " числа!");
+                error = "В ноябре нет " + day + " числа!";
                 return true;
             }
             if (month == "Декабрь" && day > 31)
             {
-                MessageBox.Show("В декабре нет " + day + " числа!");
+                error = "В декабре нет " + day + " числа!";
                 return true;
             }
-            if(day <= 0)
+            if (day <= 0)
             {
-                MessageBox.Show("Число не может быть нулевым!");
+                error = "Число не может быть нулевым!";
                 return true;
             }
             return false;
+        }
+
+        public static string GetZodiazcSingl(int day, string month) // Определение знака зодиака по дню и месяцу
+        {
+            string ZodiacSingl = "";
+            if ((day >= 21 && month == "Март") || (day <= 20 && month == "Апрель"))
+            {
+                ZodiacSingl = "Овен";
+            }
+            else if ((day >= 21 && month == "Апрель") || (day <= 20 && month == "Май"))
+            {
+                ZodiacSingl = "Телец";
+            }
+            else if ((day >= 21 && month == "Май") || (day <= 21 && month == "Июнь"))
+            {
+                ZodiacSingl = "Близнецы";
+            }
+            else if ((day >= 22 && month == "Июнь") || (day <= 22 && month == "Июль"))
+            {
+                ZodiacSingl = "Рак";
+            }
+            else if ((day >= 23 && month == "Июль") || (day <= 22 && month == "Август"))
+            {
+                ZodiacSingl = "Лев";
+            }
+            else if ((day >= 23 && month == "Август") || (day <= 23 && month == "Сентябрь"))
+            {
+                ZodiacSingl = "Дева";
+            }
+            else if ((day >= 24 && month == "Сентябрь") || (day <= 23 && month == "Октябрь"))
+            {
+                ZodiacSingl = "Веса";
+            }
+            else if ((day >= 24 && month == "Октябрь") || (day <= 22 && month == "Ноябрь"))
+            {
+                ZodiacSingl = "Скорпион";
+            }
+            else if ((day >= 23 && month == "Ноябрь") || (day <= 21 && month == "Декабрь"))
+            {
+                ZodiacSingl = "Стрелец";
+            }
+            else if ((day >= 22 && month == "Декабрь") || (day <= 20 && month == "Январь"))
+            {
+                ZodiacSingl = "Козерог";
+            }
+            else if ((day >= 21 && month == "Январь") || (day <= 18 && month == "Февраль"))
+            {
+                ZodiacSingl = "Водолей";
+            }
+            else if ((day >= 19 && month == "Февраль") || (day <= 20 && month == "Март"))
+            {
+                ZodiacSingl = "Рыбы";
+            }
+            return ZodiacSingl;
         }
 
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if(RBZodiac.IsChecked == true)
+                if (RBZodiac.IsChecked == true) // Если установлена галочка на "Знак зодиака"
                 {
-                    if(TBDay.Text == "" || TBMonth.Text == "")
+                    if (TBDay.Text == "" || TBMonth.Text == "")
                     {
                         MessageBox.Show("Все поля должны быть заполнены!");
                         return;
                     }
-                    if (GetProverkaDay(Convert.ToInt32(TBDay.Text), TBMonth.Text) == true)
+                    string error = ""; // Строка ошибок
+                    if (GetProverkaDay(Convert.ToInt32(TBDay.Text), TBMonth.Text, ref error) == true) // Проверка наличия некоректных данных
                     {
+                        MessageBox.Show(error);
                         return;
                     }
-                    string ZodiacSingl = "";
-                    if((Convert.ToInt32(TBDay.Text) >=21 && TBMonth.Text == "Март") || (Convert.ToInt32(TBDay.Text) <= 20 && TBMonth.Text == "Апрель"))
-                    {
-                        ZodiacSingl = "Овен";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 21 && TBMonth.Text == "Апрель") || (Convert.ToInt32(TBDay.Text) <= 20 && TBMonth.Text == "Май"))
-                    {
-                        ZodiacSingl = "Телец";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 21 && TBMonth.Text == "Май") || (Convert.ToInt32(TBDay.Text) <= 21 && TBMonth.Text == "Июнь"))
-                    {
-                        ZodiacSingl = "Близнецы";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 22 && TBMonth.Text == "Июнь") || (Convert.ToInt32(TBDay.Text) <= 22 && TBMonth.Text == "Июль"))
-                    {
-                        ZodiacSingl = "Рак";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 23 && TBMonth.Text == "Июль") || (Convert.ToInt32(TBDay.Text) <= 22 && TBMonth.Text == "Август"))
-                    {
-                        ZodiacSingl = "Лев";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 23 && TBMonth.Text == "Август") || (Convert.ToInt32(TBDay.Text) <= 23 && TBMonth.Text == "Сентябрь"))
-                    {
-                        ZodiacSingl = "Дева";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 24 && TBMonth.Text == "Сентябрь") || (Convert.ToInt32(TBDay.Text) <= 23 && TBMonth.Text == "Октябрь"))
-                    {
-                        ZodiacSingl = "Веса";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 24 && TBMonth.Text == "Октябрь") || (Convert.ToInt32(TBDay.Text) <= 22 && TBMonth.Text == "Ноябрь"))
-                    {
-                        ZodiacSingl = "Скорпион";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 23 && TBMonth.Text == "Ноябрь") || (Convert.ToInt32(TBDay.Text) <= 21 && TBMonth.Text == "Декабрь"))
-                    {
-                        ZodiacSingl = "Стрелец";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 22 && TBMonth.Text == "Декабрь") || (Convert.ToInt32(TBDay.Text) <= 20 && TBMonth.Text == "Январь"))
-                    {
-                        ZodiacSingl = "Козерог";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 21 && TBMonth.Text == "Январь") || (Convert.ToInt32(TBDay.Text) <= 18 && TBMonth.Text == "Февраль"))
-                    {
-                        ZodiacSingl = "Водолей";
-                    }
-                    else if ((Convert.ToInt32(TBDay.Text) >= 19 && TBMonth.Text == "Февраль") || (Convert.ToInt32(TBDay.Text) <= 20 && TBMonth.Text == "Март"))
-                    {
-                        ZodiacSingl = "Рыбы";
-                    }
                     TBHeaderResult.Visibility = Visibility.Visible;
-                    TBlResult.Text = "Ваш знак зодиака => " + ZodiacSingl;
+                    TBlResult.Text = "Ваш знак зодиака => " + GetZodiazcSingl(Convert.ToInt32(TBDay.Text), TBMonth.Text);
                 }
-                else if(RBEasternHoroscope.IsChecked == true)
+                else if (RBEasternHoroscope.IsChecked == true) // Если установлена галочка на "Знак зодиака по восточному гороскопу"
                 {
                     string Horoscope = "";
                     int Year = Convert.ToInt32(TBYear.Text);
@@ -279,6 +291,52 @@ namespace ПрактическаяРабота_5
             {
                 e.Handled = true;
             }
+        }
+
+        private void BtnManuallyData_Click(object sender, RoutedEventArgs e)
+        {
+            SPMenu.Visibility = Visibility.Collapsed;
+            SPVhodDataManually.Visibility = Visibility.Visible;
+            SPButtonSolution.Visibility = Visibility.Visible;
+        }
+
+        private void TBHeader_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SPVhodDataManually.Visibility = Visibility.Collapsed;
+            SPButtonSolution.Visibility = Visibility.Collapsed;
+            SPButton.Visibility = Visibility.Collapsed;
+            SPEasternHoroscope.Visibility = Visibility.Collapsed;
+            SPZodiacSignal.Visibility = Visibility.Collapsed;
+            SPMenu.Visibility = Visibility.Visible;
+            RBZodiac.IsChecked = false;
+            RBEasternHoroscope.IsChecked = false;
+        }
+
+        private void BtnCSVData_Click(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+            MessageBox.Show("Выберите .csv файл где хранятся входные данные");
+            WorkCSV.GetNameFileOpen(); // Взятие ссылки на файл .csv
+            if (WorkCSV.startPath == null) // Проверка если ссылка не выбрана
+            {
+                return;
+            }
+            List<Data> data = new List<Data>();
+            WorkCSV.GetData(data); // Считывание данных из файла
+            MessageBox.Show("Данные обработаны! Теперь выберите файл для сохранения результа");
+            WorkCSV.GetNameFileSave(); // Взятие ссылки на файл .csv куда будет выведен результат
+            if (WorkCSV.endPath == null) // Проверка если ссылка не выбрана
+            {
+                return;
+            }
+            WorkCSV.inputData(data);
+            MessageBox.Show("Данные успешно сохранены в файл " + WorkCSV.endPath);
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("При обработке данных возникла ошибка!");
+            //}
         }
     }
 }

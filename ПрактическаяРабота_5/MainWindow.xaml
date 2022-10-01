@@ -15,10 +15,18 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <TextBlock Text="Приложение для определения знака зодиака и гороскопа" Style="{StaticResource ResourceKey=TBStyleHeader}"/>
+            <TextBlock Name="TBHeader" Text="Приложение для определения знака зодиака и гороскопа" Style="{StaticResource ResourceKey=TBStyleHeader}" PreviewMouseDown ="TBHeader_PreviewMouseDown" Cursor="Hand" ToolTip="Выйти в главное меню"/>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Name="SPMenu" Orientation="Horizontal">
+                <Button Name="BtnCSVData" Template="{StaticResource CTButonMenu}" Click="BtnCSVData_Click" Cursor="Hand">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Ввести входные данные в качестве .csv файла</TextBlock>
+                </Button>
+                <Button Name="BtnManuallyData" Template="{StaticResource CTButonMenu}" Click="BtnManuallyData_Click">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">Ввести входные данные в ручную</TextBlock>
+                </Button>
+            </StackPanel>
+            <StackPanel x:Name="SPVhodDataManually" Orientation="Vertical" Visibility="Collapsed">
                 <TextBlock HorizontalAlignment="Center" Margin="0, 15">Выберите что нужно определить:</TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <RadioButton Name="RBZodiac" Checked="RBZodiac_Checked" Style="{StaticResource ResourceKey = RBStyle}">Знак зодиака</RadioButton>
@@ -36,8 +44,8 @@
                             <TextBox x:Name="TBDay" Width="100" PreviewTextInput="TBYear_PreviewTextInput" ToolTip="Сюда необходимо ввести целое число (день вашего рождения)"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Margin="40,0,0,0">
-                            <TextBlock HorizontalAlignment="Center">Месяц</TextBlock>
-                            <ComboBox x:Name="TBMonth" Width="200" ToolTip="Здесь необходимо выбрать месяц в котором вы родились">
+                            <TextBlock HorizontalAlignment="Center" ToolTip="Здесь необходимо выбрать месяц в котором вы родились">Месяц</TextBlock>
+                            <ComboBox x:Name="TBMonth" Width="200">
                                 <ComboBoxItem>Январь</ComboBoxItem>
                                 <ComboBoxItem>Февраль</ComboBoxItem>
                                 <ComboBoxItem>Март</ComboBoxItem>
@@ -67,7 +75,7 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row = "3">
+        <StackPanel Name="SPButtonSolution" Grid.Row = "3" Visibility="Collapsed">
             <TextBlock x:Name="TBHeaderResult" Style="{StaticResource ResourceKey=TBStyleHeader}" Visibility="Collapsed">Результат</TextBlock>
             <TextBlock Name="TBlResult">Здесь будет результат</TextBlock>
         </StackPanel>
