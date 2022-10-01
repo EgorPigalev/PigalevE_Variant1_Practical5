@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace ПрактическаяРабота_5
 {
@@ -45,7 +46,7 @@ namespace ПрактическаяРабота_5
             }
         }
 
-        public static void GetNameFileSave() // Выбор .csv файла где хранятся входные данные
+        public static void GetNameFileSave() // Выбор .csv файла где будет храниться результат
         {
             while (true)
             {
@@ -64,7 +65,7 @@ namespace ПрактическаяРабота_5
             }
         }
 
-        public static string GetMonthByNumber(int number)
+        public static string GetMonthByNumber(int number) // Получение из номера месяца его названия (чтобы воспользоваться методами из MainWindows)
         {
             string month = "";
             switch (number)
@@ -109,54 +110,68 @@ namespace ПрактическаяРабота_5
             return month;
         }
 
-        public static void GetData(List<Data> L) // Считывание данных из csv файла
+        public static void GetData(List<Data> L) // Считывание данных из csv файла с определение знака зодиака
         {
             using (StreamReader sr = new StreamReader(startPath))
             {
+                int i = 0;
                 while (sr.EndOfStream != true)
                 {
                     string[] array = sr.ReadLine().Split(';');
-                    string zodiacSign; // Переменная для хранения результата обработки на проверку знака зодиака
-                    try
+                    if (i != 0) // Пропускаем первую строку с названием столбцов
                     {
-                        if (array[0] != "" && array[1] != "")
+                        string zodiacSign; // Переменная для хранения результата обработки на проверку знака зодиака
+                        try
                         {
-                            string error = "";
-                            if (MainWindow.GetProverkaDay(Convert.ToInt32(array[0]), GetMonthByNumber(Convert.ToInt32(array[1])), ref error) == true)
+                            if (array[0] != "" && array[1] != "")
                             {
-                                zodiacSign = null;
+                                string error = "";
+                                if (MainWindow.GetProverkaDay(Convert.ToInt32(array[0]), GetMonthByNumber(Convert.ToInt32(array[1])), ref error) == true)
+                                {
+                                    zodiacSign = "Входные данные некоректны";
+                                }
+                                else
+                                {
+                                    zodiacSign = MainWindow.GetZodiazcSingl(Convert.ToInt32(array[0]), GetMonthByNumber(Convert.ToInt32(array[1])));
+                                }
                             }
                             else
                             {
-                                zodiacSign = MainWindow.GetZodiazcSingl(Convert.ToInt32(array[0]), GetMonthByNumber(Convert.ToInt32(array[1])));
+                                zodiacSign = "Входные данные некоректны";
                             }
                         }
-                        else
+                        catch
                         {
-                            zodiacSign = null;
+                            zodiacSign = "Входные данные некоректны";
                         }
+                        string signEasternHoroscope; // Переменная для хранения результата обработки на проверку знака зодиака по восточному гороскопу
+                        try
+                        {
+                            signEasternHoroscope = MainWindow.GetSignEasternHoroscope(Convert.ToInt32(array[2]));
+                        }
+                        catch
+                        {
+                            signEasternHoroscope = "Входные данные некоректны";
+                        }
+                        L.Add(new Data()
+                        {
+                            day = array[0],
+                            month = array[1],
+                            year = array[2],
+                            zodiacSign = zodiacSign,
+                            signEasternHoroscope = signEasternHoroscope
+                        });
                     }
-                    catch
-                    {
-                        zodiacSign = null;
-                    }
-                    L.Add(new Data()
-                    {
-                        day = array[0],
-                        month = array[1],
-                        year = array[2],
-                        zodiacSign = zodiacSign
-                    });
+                    i++;
                 }
             }
         }
-
-
 
         public static void inputData(List<Data> L) // Метод для вывода данных в csv файл
         {
             using (StreamWriter sw = new StreamWriter(endPath, true))
             {
+                sw.WriteLine("День;Месяц;Год;Знак зодиака;Знак зодиака по восточному гороскопу");
                 foreach (Data u in L)
                 {
                     sw.WriteLine(u.concat());

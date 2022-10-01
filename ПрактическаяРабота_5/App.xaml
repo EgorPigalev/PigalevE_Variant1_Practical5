@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:ПрактическаяРабота_5"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
         <Style TargetType="Window" x:Key="WStyle">
             <Setter Property="Background">
                 <Setter.Value>

@@ -180,6 +180,60 @@ namespace ПрактическаяРабота_5
             return ZodiacSingl;
         }
 
+        public static string GetSignEasternHoroscope(int Year) // Определение знака зодиака по восточному календарю
+        {
+            string Horoscope = "";
+            Year = Year % 12;
+            if (Year == 0)
+            {
+                Horoscope = "Обезьяна";
+            }
+            else if (Year == 1)
+            {
+                Horoscope = "Петух";
+            }
+            else if (Year == 2)
+            {
+                Horoscope = "Собака";
+            }
+            else if (Year == 3)
+            {
+                Horoscope = "Кабан";
+            }
+            else if (Year == 4)
+            {
+                Horoscope = "Крыса";
+            }
+            else if (Year == 5)
+            {
+                Horoscope = "Бык";
+            }
+            else if (Year == 6)
+            {
+                Horoscope = "Тигр";
+            }
+            else if (Year == 7)
+            {
+                Horoscope = "Кролик";
+            }
+            else if (Year == 8)
+            {
+                Horoscope = "Дракон";
+            }
+            else if (Year == 9)
+            {
+                Horoscope = "Змея";
+            }
+            else if (Year == 10)
+            {
+                Horoscope = "Лошадь";
+            }
+            else if (Year == 11)
+            {
+                Horoscope = "Овца";
+            }
+            return Horoscope;
+        }
         private void BtnResult_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -202,57 +256,7 @@ namespace ПрактическаяРабота_5
                 }
                 else if (RBEasternHoroscope.IsChecked == true) // Если установлена галочка на "Знак зодиака по восточному гороскопу"
                 {
-                    string Horoscope = "";
-                    int Year = Convert.ToInt32(TBYear.Text);
-                    Year = Year % 12;
-                    if (Year == 0)
-                    {
-                        Horoscope = "Обезьяна";
-                    }
-                    else if (Year == 1)
-                    {
-                        Horoscope = "Петух";
-                    }
-                    else if (Year == 2)
-                    {
-                        Horoscope = "Собака";
-                    }
-                    else if (Year == 3)
-                    {
-                        Horoscope = "Кабан";
-                    }
-                    else if (Year == 4)
-                    {
-                        Horoscope = "Крыса";
-                    }
-                    else if (Year == 5)
-                    {
-                        Horoscope = "Бык";
-                    }
-                    else if (Year == 6)
-                    {
-                        Horoscope = "Тигр";
-                    }
-                    else if (Year == 7)
-                    {
-                        Horoscope = "Кролик";
-                    }
-                    else if (Year == 8)
-                    {
-                        Horoscope = "Дракон";
-                    }
-                    else if (Year == 9)
-                    {
-                        Horoscope = "Змея";
-                    }
-                    else if (Year == 10)
-                    {
-                        Horoscope = "Лошадь";
-                    }
-                    else if (Year == 11)
-                    {
-                        Horoscope = "Овца";
-                    }
+                    string Horoscope = GetSignEasternHoroscope(Convert.ToInt32(TBYear.Text));
                     TBHeaderResult.Visibility = Visibility.Visible;
                     TBlResult.Text = "Знак по восточному гороскопу => " + Horoscope;
                 }
@@ -314,29 +318,29 @@ namespace ПрактическаяРабота_5
 
         private void BtnCSVData_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            MessageBox.Show("Выберите .csv файл где хранятся входные данные");
-            WorkCSV.GetNameFileOpen(); // Взятие ссылки на файл .csv
-            if (WorkCSV.startPath == null) // Проверка если ссылка не выбрана
+            try
             {
-                return;
+                MessageBox.Show("Выберите .csv файл где хранятся входные данные");
+                WorkCSV.GetNameFileOpen(); // Взятие ссылки на файл .csv
+                if (WorkCSV.startPath == null) // Проверка если ссылка не выбрана
+                {
+                    return;
+                }
+                List<Data> data = new List<Data>();
+                WorkCSV.GetData(data); // Считывание данных из файла
+                MessageBox.Show("Данные обработаны! Теперь выберите файл для сохранения результа");
+                WorkCSV.GetNameFileSave(); // Взятие ссылки на файл .csv куда будет выведен результат
+                if (WorkCSV.endPath == null) // Проверка если ссылка не выбрана
+                {
+                    return;
+                }
+                WorkCSV.inputData(data); // Вывод данных в файл
+                MessageBox.Show("Данные успешно сохранены в файл " + WorkCSV.endPath);
             }
-            List<Data> data = new List<Data>();
-            WorkCSV.GetData(data); // Считывание данных из файла
-            MessageBox.Show("Данные обработаны! Теперь выберите файл для сохранения результа");
-            WorkCSV.GetNameFileSave(); // Взятие ссылки на файл .csv куда будет выведен результат
-            if (WorkCSV.endPath == null) // Проверка если ссылка не выбрана
+            catch
             {
-                return;
+                MessageBox.Show("При обработке данных возникла ошибка!");
             }
-            WorkCSV.inputData(data);
-            MessageBox.Show("Данные успешно сохранены в файл " + WorkCSV.endPath);
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("При обработке данных возникла ошибка!");
-            //}
         }
     }
 }

@@ -66,7 +66,7 @@
                     <TextBlock Margin="0, 10">Узнайте свой знак зодиака по восточному гороскопу:</TextBlock>
                     <StackPanel>
                         <TextBlock HorizontalAlignment="Center">Год рождения</TextBlock>
-                        <TextBox x:Name="TBYear" Width="100" PreviewTextInput="TBYear_PreviewTextInput" ToolTip="Сюда необходимо написать целое число не меньшее чем 1900 (год своего рождения)"></TextBox>
+                        <TextBox x:Name="TBYear" Width="150" PreviewTextInput="TBYear_PreviewTextInput" ToolTip="Сюда необходимо написать целое число не меньшее чем 1900 (год своего рождения)"></TextBox>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="SPButton" Orientation="Horizontal" Visibility="Collapsed">
